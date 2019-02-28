@@ -1,28 +1,16 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useReducer } from "react";
+import Context from "./state/context";
+import { Reducer } from "./state/reducer";
+import Counter from "./containers/counter";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+export default function App() {
+  const [state, dispatch] = useReducer(Reducer, useContext(Context));
+
+  return (
+    <div className="container">
+      <Context.Provider value={{ state, dispatch }}>
+        <Counter />
+      </Context.Provider>
+    </div>
+  );
 }
-
-export default App;
